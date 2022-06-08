@@ -1,0 +1,51 @@
+{
+  "beauty_title": "пер. ",
+  "title": "Пхия",
+  "other_titles": "Триев",
+  "connect": "",
+  "add_time": "2021-09-22 13:18:13",
+
+  "email": "qwerty@mail.ru",
+  "fam": "Пупкин",
+  "name": "Василий",
+  "otc": "Иванович",
+  "phone": "+7 555 55 55",
+
+  "latitude": "45.3842",
+  "longitude": "7.1525",
+  "height": "1200",
+
+  "level_winter": "",
+  "level_summer": "1А",
+  "level_autumn": "1А",
+  "level_spring": "",
+
+  "data": "<картинка>",
+  "title_img": "Седловина"
+}
+
+{
+  "beauty_title": "тро. ",
+  "title": "Тропов",
+  "other_titles": "Тропинка",
+  "connect": "",
+  "add_time": "2021-09-22 13:18:13",
+
+  "email": "21324242@mail.ru",
+  "fam": "Пупкин2",
+  "name": "Василий2",
+  "otc": "Иванович2",
+  "phone": "+7 555 65 55",
+
+  "latitude": "45.3812",
+  "longitude": "9.1525",
+  "height": "1111",
+
+  "level_winter": "2A",
+  "level_summer": "1A",
+  "level_autumn": "1A",
+  "level_spring": "3A",
+
+  "data": "<картинка>",
+  "title_img": "Кириешки"
+}
