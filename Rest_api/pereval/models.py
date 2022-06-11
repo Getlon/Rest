@@ -2,7 +2,7 @@ from django.db import models
 
 
 class User(models.Model):
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     phone = models.CharField(max_length=100)
     fam = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
@@ -10,13 +10,14 @@ class User(models.Model):
 
 
 class PerevalAdded(models.Model):
-    date_added = models.DateTimeField(blank=False, null=False)
+    submitdata = models.OneToOneField('SubmitData', on_delete=models.CASCADE, primary_key=True)
     beauty_title = models.TextField()
     title = models.TextField()
     other_titles = models.TextField()
     connect = models.CharField(max_length=1, blank=True)
     add_time = models.DateTimeField(auto_now_add=True)
     coord = models.ForeignKey('Coords', on_delete=models.CASCADE)
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
     level_winter = models.TextField(max_length=3, blank=True)
     level_summer = models.TextField(max_length=3, blank=True)
     level_autumn = models.TextField(max_length=3, blank=True)
