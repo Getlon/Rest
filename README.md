@@ -16,7 +16,7 @@ PATCH /api/pereval/SubmitData/<id>/ принимает json(такой же ка
 Пример POST запроса по /api/pereval/SubmitData/:
 
 {
-  "beauty_title": "п. гора 2",
+  "beauty_title": "п. гора 2", 0x0A
   "title": "печенкина гора",
   "other_titles": "гора печенюхи",
   "connect": "",
