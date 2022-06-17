@@ -45,11 +45,10 @@ class SubmitDataListView(generics.ListAPIView):
         queryset = SubmitData.objects.all()
         email = self.request.query_params.get('user__email')
         if email is not None:
-            email = email.replace('<', '')
-            email = email.replace('>', '')
+            # email = email.replace('<', '')
+            # email = email.replace('>', '')
             queryset = queryset.filter(email=email)
         return queryset
-
 
 
 @csrf_exempt
@@ -59,7 +58,7 @@ def submitdata(request):
         serializer = SubmitDataDetailSerializer(submitdata, many=True)
         return JsonResponse(serializer.data, safe=False)
 
-    elif request.method == 'POST':
+    if request.method == 'POST':
         try:
             data = JSONParser().parse(request)
             serializer = SubmitDataDetailSerializer(data=data)
@@ -92,17 +91,20 @@ def submitdata(request):
 @csrf_exempt
 def submitdata_id(request, pk):
     if request.method == 'GET':
-        submitdata_obj = SubmitData.objects.filter(id=pk)[0]
-        serializer1 = SubmitDataDetailSerializer(submitdata_obj)
-        perevalareas_obj = PerevalAreas.objects.filter(parent=submitdata_obj.id)[0]
-        serializer2 = PerevalAreasDetailSerializer(perevalareas_obj)
-        return JsonResponse({**serializer1.data, **serializer2.data}, safe=False)
+        try:
+            submitdata_obj = SubmitData.objects.filter(id=pk)[0]
+            serializer1 = SubmitDataDetailSerializer(submitdata_obj)
+            perevalareas_obj = PerevalAreas.objects.filter(parent=submitdata_obj.id)[0]
+            serializer2 = PerevalAreasDetailSerializer(perevalareas_obj)
+            return JsonResponse({**serializer1.data, **serializer2.data})
+        except IndexError:
+            return JsonResponse({"message": "No such id exists."})
 
     elif request.method == 'PATCH':
         try:
             data = JSONParser().parse(request)
             serializer = SubmitDataDetailSerializer(data=data)
-            if serializer.is_valid() and PerevalAreas.objects.filter(parent=pk)[0].status != 'new':
+            if serializer.is_valid() and PerevalAreas.objects.filter(parent=pk)[0].status == 'new':
                 submitdata_obj = SubmitData.objects.filter(id=pk)[0]
                 submitdata_obj.beauty_title = data['beauty_title']
                 submitdata_obj.title = data['title']
@@ -154,7 +156,7 @@ def submitdata_id(request, pk):
                 perevalareas.save()
 
                 return JsonResponse({"state": 1, "message": 'null'})
-            elif PerevalAreas.objects.filter(parent=pk)[0].status == 'new':
+            elif PerevalAreas.objects.filter(parent=pk)[0].status != 'new':
                 return JsonResponse({"state": 0, "message": 'This application is not new.'})
             return JsonResponse({"state": 0, "message": "Bad Request"})
         except Exception as ex:

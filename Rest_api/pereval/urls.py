@@ -10,8 +10,8 @@ urlpatterns = [
     path('SprActivitiesTypes/add/', SprActivitiesTypesCreateView.as_view()),
     path('Coords/add/', CoordsCreateView.as_view()),
     path('PerevalAddedPerevalImages/add/', PerevalAddedPerevalImagesCreateView.as_view()),
-    path('SubmitData/', SubmitDataListView.as_view()),
     path('SubmitData/', submitdata),
+    path('SubmitData/filter/', SubmitDataListView.as_view()),
     path('SubmitData/<int:pk>/', submitdata_id),
 
 ]
